@@ -1,0 +1,72 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    background: var(--nav_back);
+    border-radius: 16px;
+    padding: 32px;
+}
+.header {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+.header .right {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    margin-left: auto;
+}
+.team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+}
+.team .icon {
+    fill: var(--text-color);
+}
+.team .bot {
+    font-size: 24px;
+}
+.professions {
+    background: var(--app_back);
+    border-radius: 16px;
+    display: flex;
+    align-content: flex-start;
+}
+.professions .item {
+    background: var(--nav_back);
+    padding: 8px 16px;
+    border-radius: 16px;
+    margin: 5px;
+    height: 40px;
+    font-size: 16px;
+}
+.title, .text {
+    width: 80%;
+}
+.title {
+    font-size: 20px;
+}
+.text {
+    font-size: 20px;
+}
+.like .icon {
+    fill: var(--text-color);
+}
+.footer {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.footer .button {
+    border-radius: 16px;
+    font-size: 20px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px 16px;
+    background: var(--second-accent-color);
+}

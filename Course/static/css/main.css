@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+	color: var(--text-color);
+	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+:root{
+    --main_color: #0F0F0F;
+    --text_color: #F0F0F0;
+}
+
+:root{
+	--app_back : #161B1D;
+	--nav_back : #2D394B;
+	--text-color: #F0F0F0;
+	--text_second_color : #666;
+	--title-font: 'Inter', sans-serif;
+	--accent-color: #0088a9;
+	--second-accent-color: #D68710;
+	--text_third_color: #000;
+	--input-back: #fff;
+	--back: rgb(17 24 39 / var(--tw-bg-opacity));
+    --bs-secondary-color: var(--text-color) !important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.page{
+    min-height: 100vh;
+    background: var(--app_back);
+}
+
+ul{
+    margin-bottom: 0 !important;
+}

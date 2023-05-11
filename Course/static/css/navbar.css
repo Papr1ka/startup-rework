@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+ li, h1, a {
+	 font-size: 18px;
+	 font-weight: 500;
+	 color: var(--text-color);
+	 text-decoration: none;
+}
+ .menu {
+	 display: none;
+	 cursor: pointer;
+	 font-size: 24px;
+	 align-items: center;
+	 transition: 0.3s linear;
+}
+ header {
+	 background: var(--nav_back);
+}
+ .dropdown {
+	 display: none;
+	 position: absolute;
+	 background: var(--nav_back);
+	 padding: 16px;
+	 border-radius: 16px;
+	 transform: translateX(-60px);
+	 margin-top: 16px;
+}
+ .dropdown ul {
+	 list-style: none;
+}
+ .dropdown ul li {
+	 padding: 10px 20px;
+}
+ .dropdown ul li a {
+	 transition: all 0.3s ease 0s;
+}
+ .dropdown ul li a:hover {
+	 color: var(--accent-color);
+}
+ .dropdown::before {
+	 top: -16px;
+	 right: 16px;
+	 left: auto;
+	 border: 8px solid transparent;
+	 border-bottom-color: var(--nav_back);
+	 position: absolute;
+	 display: inline-block;
+	 content: "";
+}
+ .nav-container {
+	 display: flex;
+	 justify-content: space-between;
+	 padding: 5px 0;
+	 max-width: 1160px;
+	 margin: 0 auto;
+}
+ .nav-left, .nav-right {
+	 display: flex;
+	 align-items: center;
+}
+ .nav-left {
+	 margin-left: 16px;
+}
+ .logo {
+	 cursor: pointer;
+	 margin: 0 40px 0 20px;
+	 font-size: 24px;
+}
+ .nav__links {
+	 list-style: none;
+}
+ .nav__links li {
+	 display: inline-block;
+	 padding: 0px 20px;
+}
+ .nav__links li a {
+	 transition: all 0.3s ease 0s;
+}
+ .nav__links li a:hover {
+	 color: var(--accent-color);
+}
+ .nav-link {
+	 padding: 0 12px;
+}
+ .nav-icon {
+	 fill: #f0f0f0;
+	 transition: 0.2s linear;
+}
+ .nav-icon:hover {
+	 fill: var(--accent-color);
+	 transform: translateY(1px);
+}
+ .responsive {
+	 display: none;
+	 flex-direction: column;
+	 justify-content: flex-start;
+	 transition: max-height 0.15s ease-out;
+}
+ .responsive .inner {
+	 margin-left: 40px;
+}
+ .responsive .inner .item {
+	 font-family: 'Montserrat', sans-serif;
+	 font-size: 18px;
+	 font-weight: 500;
+	 color: #edf0f1;
+	 text-decoration: none;
+	 padding: 20px 0;
+}
+ .visible {
+	 display: flex;
+}
+ @media screen and (max-width: 900px) {
+	 .logo {
+		 display: none;
+	}
+}
+ @media screen and (max-width: 768px) {
+	 .nav-left nav, .logo-img {
+		 display: none;
+	}
+	 .menu {
+		 display: inline-block;
+	}
+	 .responsive {
+		 transition: max-height 0.25s ease-in;
+	}
+}
+ 

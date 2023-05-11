@@ -1,0 +1,25 @@
+<form action="" class="search-form">
+    <span class="search-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.4167 25.375C6.82499 25.375 1.45833 20.0083 1.45833 13.4167C1.45833 6.825 6.82499 1.45834 13.4167 1.45834C20.0083 1.45834 25.375 6.825 25.375 13.4167C25.375 20.0083 20.0083 25.375 13.4167 25.375ZM13.4167 3.20834C7.78166 3.20834 3.20833 7.79334 3.20833 13.4167C3.20833 19.04 7.78166 23.625 13.4167 23.625C19.0517 23.625 23.625 19.04 23.625 13.4167C23.625 7.79334 19.0517 3.20834 13.4167 3.20834Z" fill="#292D32"/>
+            <path d="M25.6667 26.5417C25.445 26.5417 25.2233 26.46 25.0483 26.285L22.715 23.9517C22.3767 23.6133 22.3767 23.0533 22.715 22.715C23.0533 22.3767 23.6133 22.3767 23.9517 22.715L26.285 25.0483C26.6233 25.3867 26.6233 25.9467 26.285 26.285C26.11 26.46 25.8883 26.5417 25.6667 26.5417Z" fill="#292D32"/>
+        </svg>
+    </span>
+    <input [formControl]="searchControl" class="search-input" type="search" id="search-input" value="" placeholder="Ищу команду..." maxlength="200">
+    <button class="search-button" type="submit">Найти</button>
+</form>
+<div class="pre-results-container">
+    <div class="pre-results" id="pre-results">
+        <div class="inner">
+            {% if validated %}
+            <div class="item" *ngFor="let item of validatedData">{{item.pre}}<span>{{item.founded}}</span>{{item.post}}</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="categories">
+    {% for element in categories %}
+    <div class="item">{{element}}</div>
+    {% endfor %}
+</div>            
+<div class="line"></div>
