@@ -1,20 +1,40 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from colorfield.fields import ColorField
 
 User = get_user_model()
 
 # Create your models here.
 class Skill(models.Model):
     name = models.CharField(max_length=300)
-
+    color = ColorField(default="#FF0000", format="hexa")
+    
+    def __str__(self) -> str:
+        return self.name
+    
+    def __repr__(self) -> str:
+        return self.__str__()
 
 class UserModel(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="model")
     fio = models.CharField(max_length=200, default="Ivanov I.I.")
-    bornAge = models.CharField(max_length=20, default=18)
+    about = models.CharField(max_length=1000, blank=True)
     skills = models.ManyToManyField(Skill, related_name="users")
+    
+    
+    def __str__(self) -> str:
+        return self.user.username
+    
+    def __repr__(self) -> str:
+        return self.__str__()
 
+class Notification(models.Model):
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name="notifications")
+    message = models.CharField(max_length=500)
+    
+    class Meta:
+        ordering = ['-id']
 
 class Project(models.Model):
     host = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name="projects")
@@ -25,6 +45,16 @@ class Project(models.Model):
     date_of_public = models.DateTimeField(auto_now_add=True)
     applications = models.ManyToManyField(UserModel, related_name="wishing")
     skills = models.ManyToManyField(Skill, related_name="projects")
+    
+    class Meta:
+        ordering = ['-id']
+    
+    def __str__(self) -> str:
+        return self.title
+    
+    def __repr__(self) -> str:
+        return self.__str__()
+
     
     def get_absolute_url(self):
         return reverse("project_detail", kwargs={"pk": self.pk})

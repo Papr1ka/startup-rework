@@ -30,7 +30,7 @@ a{
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; min-height: -webkit-fill-available;}
 .page{
     min-height: 100vh;
     background: var(--app_back);

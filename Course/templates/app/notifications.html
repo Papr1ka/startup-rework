@@ -1,0 +1,22 @@
+{% extends 'app/cabinet_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block data %}
+<div class="d-flex flex-column" data-bs-theme="dark" style="gap: 3em;">
+    {% if object_list.count > 0 %}
+    {% for notify in object_list %}
+    <div class="card">
+        <div class="card-title">
+            {{ notify.message }}
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="card">
+        <div class="card-title">
+            У вас нет уведомлений
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

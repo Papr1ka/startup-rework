@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 <link rel="stylesheet" href="{% static 'css/card.css' %}">
 <link rel="stylesheet" href="{% static 'css/search.css' %}">
+<link rel="stylesheet" href="{% static 'css/project.css' %}">
 {% endblock links %}
 
 {% block navbar %}
@@ -13,18 +14,54 @@
 {% endblock %}
 
 {% block content %}
-<div class="body-container">
-    <div class="wrapper">
-        <p>{{object.title}}</p>
-        <p>{{object.little_description}}</p>
-        <p>{{object.main_description}}</p>
-        <p>{{object.likes}}</p>
-        {% for elem in applications %}
-        <p>{{ elem.username }}</p>
-        {% endfor %}
-        {% for elem in skills %}
-        <p>{{ elem.name }}</p>
-        {% endfor %}
-    </div>
+<div class="body-container mb-auto cover-container d-flex h-100 p-3 mx-auto flex-column justify-content-center align-items-center mh-vh">
+    <main class="container wrapper">
+        <div class="row">
+            <div class="col-md-8 blog-main">
+                <h3 class="pb-3 mb-4 font-italic border-bottom">
+                {{object.title}}
+                </h3>
+        
+                <div class="blog-post">
+                <h2 class="blog-post-title">Краткое описание</h2>
+                <p>{{object.little_description}}</p>
+                </div><!-- /.blog-post -->
+        
+                <div class="blog-post">
+                <h2 class="blog-post-title">Полное описание</h2>
+                <p>{{object.main_description}}</p>
+                </div><!-- /.blog-post -->
+        
+            </div><!-- /.blog-main -->
+        
+            <aside class="col-md-4 blog-sidebar">
+                <div class="p-3 mb-3 bg-dark rounded">
+                <h4 class="font-italic">Разработчик</h4>
+                <p class="mb-0">{{object.host}}</p>
+                </div>
+        
+                <div class="p-3">
+                <h4 class="font-italic">Необходимые умения</h4>
+                <ol class="professions list-unstyled mb-0">
+                    {% for skill in object.skills.all %}
+                    <div class="item" style="color: {{ skill.color }}">{{ skill | title }}</div>
+                    {% endfor %}
+                </ol>
+                </div>
+        
+                <div class="p-3">
+                </div>
+                <ol class="d-flex flex-column sub-display-block justify-content-center align-items-baseline gap-3">
+                    {% if request.user.id == object.host.id %}
+                    <a type="button" class="btn btn-warning" href="{% url 'project_update' pk=object.pk %}">Изменить</a>
+                    <a type="button" class="btn btn-danger" href="{% url 'project_delete' pk=object.pk %}">Удалить</a>
+                    {% else %}
+                    <a type="button" class="btn btn-primary" href="{% url 'project_respond' pk=object.pk %}">Откликнуться</a>
+                    {% endif %}
+                </ol>
+            </aside>
+        
+            </div>
+    </main>
 </div>
 {% endblock %}

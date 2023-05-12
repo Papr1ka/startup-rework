@@ -1,0 +1,45 @@
+{% extends 'app/cabinet_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block data %}
+<div class="d-flex flex-column" data-bs-theme="dark" style="gap: 3em;">
+    {% if object_list.count > 0 %}
+    {% for project in object_list %}
+        <div class="card">
+            <div class="card-title">
+                {{ project.title }}
+            </div>
+            <div class="f-flex d-column card-body">
+                {% if project.applications.all.count > 0 %}
+                {% for user in project.applications.all %}
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ user }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ user.fio }}</h6>
+                    <p class="card-text">{{ user.about }}</p>
+                    <form action="{% url 'respond_agree' project_id=project.id pk=user.pk %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-success" href="#" class="card-link">Принять</button>
+                    </form>
+                    <form action="{% url 'respond_disagree' project_id=project.id pk=user.pk %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-danger" href="#" class="card-link">Отклонить</button>
+                    </form>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>Желающих нет</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+    <div class="card">
+        <div class="card-title">
+            У вас нет проектов
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

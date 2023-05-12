@@ -14,12 +14,12 @@
 
 {% block content %}
 <div class="page body-container h-100">
-    <div class="page wrapper d-flex justify-content-center mh-100 align-items-center">
-        <form method="POST" data-bs-theme="dark">
-            {% csrf_token %}
-            {{ form|crispy }}
+    <div class="page wrapper d-flex justify-content-center mh-100 align-items-center flex-column">
+        Вы уверены, что хотите удалить запись?
+        <form method="POST">
+            {% csrf_token %}           
             <button class="btn btn-primary" type="submit">
-                Сохранить
+                Удалить
             </button>
         </form>
     </div>

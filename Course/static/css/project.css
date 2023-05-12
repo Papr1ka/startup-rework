@@ -1,0 +1,13 @@
+.mh-vh
+{
+    min-height: 70vh;
+}
+
+.sub-display-block *{
+    display: block;
+    width: fit-content;
+}
+
+.gap-3{
+    gap: 3em;
+}
