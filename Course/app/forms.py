@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm
 from .models import Project
 
 User = get_user_model()
@@ -23,4 +23,4 @@ class RegisterForm(UserCreationForm):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ["title", "little_description", "main_description"]
+        fields = ["title", "little_description", "main_description", "skills"]

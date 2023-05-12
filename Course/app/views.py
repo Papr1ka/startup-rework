@@ -1,12 +1,14 @@
 from typing import Any, Dict
-from django.shortcuts import render
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from .forms import *
 from django.views.generic import CreateView, FormView, RedirectView, DetailView
 from django.urls import reverse_lazy
 from .models import *
+from . import signals
 
 # Create your views here.
 class HomeView(View):
@@ -38,6 +40,11 @@ class LoginView(FormView):
     model = get_user_model()
     template_name = "app/auth.html"
     success_url = reverse_lazy("home")
+
+    def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        if self.request.user.is_authenticated:
+            return redirect(self.success_url)
+        return super().get(request, *args, **kwargs)
     
     def form_valid(self, form):
         login(self.request, form.get_user())
@@ -50,6 +57,12 @@ class RegisterView(CreateView):
     model = get_user_model()
     template_name = "app/auth.html"
     success_url = reverse_lazy("home")
+
+    def form_valid(self, form):
+        r = super().form_valid(form)
+        user = authenticate(self.request, username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
+        login(self.request, user)
+        return r
 
 class LogoutView(RedirectView):
     permanent = True
@@ -79,3 +92,13 @@ class ProjectCreateView(FormView):
         obj.save()
         self.url = obj.get_absolute_url()
         return super().form_valid(form)
+
+class PasswordResetView(FormView):
+    form_class = PasswordResetForm
+    model = User
+    template_name = "app/form.html"
+    success_url = reverse_lazy("home")
+
+    def form_invalid(self, form: Any) -> HttpResponse:
+
+        return super().form_invalid(form)

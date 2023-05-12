@@ -5,10 +5,16 @@ from django.urls import reverse
 User = get_user_model()
 
 # Create your models here.
+class Skill(models.Model):
+    name = models.CharField(max_length=300)
+
+
 class UserModel(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="model")
     fio = models.CharField(max_length=200, default="Ivanov I.I.")
     bornAge = models.CharField(max_length=20, default=18)
+    skills = models.ManyToManyField(Skill, related_name="users")
+
 
 class Project(models.Model):
     host = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name="projects")
@@ -18,14 +24,11 @@ class Project(models.Model):
     likes = models.IntegerField(default=0)
     date_of_public = models.DateTimeField(auto_now_add=True)
     applications = models.ManyToManyField(UserModel, related_name="wishing")
+    skills = models.ManyToManyField(Skill, related_name="projects")
     
     def get_absolute_url(self):
         return reverse("project_detail", kwargs={"pk": self.pk})
 
-class Skill(models.Model):
-    name = models.CharField(max_length=300)
-    projects = models.ManyToManyField(Project, related_name="skills")
-    users = models.ManyToManyField(UserModel, related_name="skills")
 
 '''
 Необходимые поля 1.Таблицы юзеров(которую необходимо наследовать):

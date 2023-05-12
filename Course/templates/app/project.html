@@ -15,7 +15,16 @@
 {% block content %}
 <div class="body-container">
     <div class="wrapper">
-        {{ object | crispy }}
+        <p>{{object.title}}</p>
+        <p>{{object.little_description}}</p>
+        <p>{{object.main_description}}</p>
+        <p>{{object.likes}}</p>
+        {% for elem in applications %}
+        <p>{{ elem.username }}</p>
+        {% endfor %}
+        {% for elem in skills %}
+        <p>{{ elem.name }}</p>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
