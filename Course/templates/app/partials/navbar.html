@@ -11,10 +11,10 @@
             <h1 class="logo"><a href="{% url 'home' %}">StartApp</a></h1>
             <nav>
                 <ul class="nav__links">
-                    <li><a href="{% url 'project_create' %}">Создать стартап</a></li>
+                    <li><a href="{% url 'project_create' %}">Создать идею</a></li>
                     {% if not request.user.is_authenticated %}
                     <li><a href="{% url 'login' %}">Войти</a></li>
-                    <li><a href="{% url 'register' %}">Зарегестрироваться</a></li>
+                    <li><a href="{% url 'register' %}">Зарегистрироваться</a></li>
                     {% endif %}
                 </ul>
             </nav>

@@ -30,6 +30,7 @@
                 <a href="{% url 'login' %}">Уже есть аккаунт?</a>
                 {% else %}
                 <a href="{% url 'register' %}">Создать аккаунт</a>
+                <a href="{% url 'password_reset' %}">Забыли пароль?</a>
                 {% endif %}
             </span>
         </form>

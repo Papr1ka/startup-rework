@@ -15,6 +15,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordResetDoneView
 
 class RequiredSuperUserMixin(UserPassesTestMixin):
     permission_denied_message = "Not found"
@@ -173,15 +174,19 @@ class ProjectDeleteView(LoginRequiredMixin, DeleteView):
             raise PermissionDenied
     
 
-class PasswordResetView(LoginRequiredMixin, FormView):
-    form_class = PasswordResetForm
-    model = User
+class PasswordResetView(PasswordResetView):
     template_name = "app/form.html"
-    success_url = reverse_lazy("home")
 
-    def form_valid(self, form: PasswordResetForm) -> HttpResponse:
-        form.save()
-        return super().form_valid(form)
+class PasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = "app/form.html"
+
+class PasswordResetDoneView(PasswordResetDoneView):
+    template_name = "app/message.html"
+    
+    def get_context_data(self, **kwargs: Any) -> Any:
+        r = super().get_context_data(**kwargs)
+        r['message'] = "Письмо отправлено, проверяйте почту"
+        return r
 
 class ProjectRespondView(LoginRequiredMixin, DetailView):
     permanent = True
