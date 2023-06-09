@@ -21,7 +21,7 @@ class UserModel(models.Model):
     fio = models.CharField(max_length=200, default="Ivanov I.I.")
     about = models.CharField(max_length=1000, blank=True)
     skills = models.ManyToManyField(Skill, related_name="users")
-    
+    contacts = models.CharField(max_length=300, blank=True)
     
     def __str__(self) -> str:
         return self.user.username

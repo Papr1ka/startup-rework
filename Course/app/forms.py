@@ -33,7 +33,7 @@ class SkillForm(forms.ModelForm):
 class UserModelInfoForm(forms.ModelForm):
     class Meta:
         model = UserModel
-        fields = ["fio", "skills", "about"]
+        fields = ["fio", "skills", "about", "contacts"]
 
 class UserInfoForm(forms.ModelForm):
     class Meta:

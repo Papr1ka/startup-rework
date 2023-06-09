@@ -276,10 +276,9 @@ class RespondAgreeView(LoginRequiredMixin, View):
             return HttpRequest("Пользователь не найден")
         if respondent.wishing.contains(obj):
             obj.applications.remove(respondent)
-            Notification.objects.create(user=respondent, message=f"Вас ВЗЯЛИ в проект {obj.title}")
+            Notification.objects.create(user=respondent, message=f"Вас ВЗЯЛИ в проект {obj.title}, контакты: {obj.host.contacts}")
             return redirect(reverse("responds"))
         else:
-            print(respondent, obj)
             return HttpResponse("Что вы имели ввиду?")
 
 class RespondDisagreeView(LoginRequiredMixin, View):
