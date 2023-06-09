@@ -125,7 +125,7 @@ class ProjectDetailView(DetailView):
 class ProjectCreateView(LoginRequiredMixin, FormView):
     form_class = ProjectForm
     model = Project
-    template_name = "app/form.html"
+    template_name = "app/project_create.html"
     url = None
     
     def get_success_url(self) -> str:
@@ -276,10 +276,9 @@ class RespondAgreeView(LoginRequiredMixin, View):
             return HttpRequest("Пользователь не найден")
         if respondent.wishing.contains(obj):
             obj.applications.remove(respondent)
-            Notification.objects.create(user=respondent, message=f"Вас ВЗЯЛИ в проект {obj.title}")
+            Notification.objects.create(user=respondent, message=f"Вас ВЗЯЛИ в проект {obj.title}, контакты: {obj.host.contacts}")
             return redirect(reverse("responds"))
         else:
-            print(respondent, obj)
             return HttpResponse("Что вы имели ввиду?")
 
 class RespondDisagreeView(LoginRequiredMixin, View):
@@ -309,3 +308,17 @@ class NotificationsView(LoginRequiredMixin, ListView):
         user = UserModel.objects.get(user=self.request.user)
         qs = user.notifications.all()
         return qs
+
+class DeleteAccountView(LoginRequiredMixin, TemplateView):
+    template_name = "app/message.html"
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context.update(message="Ваша аккаунт успешно удалён")
+        return context
+
+    def get(self, request, *args, **kwargs):
+        UserModel.objects.filter(user=request.user).delete()
+        User.objects.filter(id=request.user.id).delete()
+        logout(self.request)
+        return super().get(request, *args, **kwargs)
