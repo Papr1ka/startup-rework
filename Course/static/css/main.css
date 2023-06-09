@@ -39,3 +39,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; min-height:
 ul{
     margin-bottom: 0 !important;
 }
+
+.alert-danger *{
+	color: var(--bs-gray-900);
+}
