@@ -320,4 +320,5 @@ class DeleteAccountView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         UserModel.objects.filter(user=request.user).delete()
         User.objects.filter(id=request.user.id).delete()
+        logout(self.request)
         return super().get(request, *args, **kwargs)
