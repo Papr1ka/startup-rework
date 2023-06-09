@@ -7,6 +7,7 @@ from .views import (
     PasswordResetView,
     PasswordResetConfirmView,
     PasswordResetDoneView,
+    DeleteAccountView,
     ProjectDetailView,
     ProjectCreateView,
     ProjectUpdateView,
@@ -30,6 +31,7 @@ urlpatterns = [
     path('reset_password/', PasswordResetView.as_view(), name="password_reset"),
     path('reset_password/confirm/<str:uidb64>/<str:token>/', PasswordResetConfirmView.as_view(), name="password_reset_complete"),
     path('reset_password/done/', PasswordResetDoneView.as_view(), name="password_reset_done"),
+    path('delete_account/', DeleteAccountView.as_view(), name="delete_account"),
     
     #Сервис идей
     path('', HomeView.as_view(), name="home"),

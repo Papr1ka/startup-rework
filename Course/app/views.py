@@ -308,3 +308,16 @@ class NotificationsView(LoginRequiredMixin, ListView):
         user = UserModel.objects.get(user=self.request.user)
         qs = user.notifications.all()
         return qs
+
+class DeleteAccountView(LoginRequiredMixin, TemplateView):
+    template_name = "app/message.html"
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context.update(message="Ваша аккаунт успешно удалён")
+        return context
+
+    def get(self, request, *args, **kwargs):
+        UserModel.objects.filter(user=request.user).delete()
+        User.objects.filter(id=request.user.id).delete()
+        return super().get(request, *args, **kwargs)
