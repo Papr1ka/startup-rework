@@ -125,7 +125,7 @@ class ProjectDetailView(DetailView):
 class ProjectCreateView(LoginRequiredMixin, FormView):
     form_class = ProjectForm
     model = Project
-    template_name = "app/form.html"
+    template_name = "app/project_create.html"
     url = None
     
     def get_success_url(self) -> str:
