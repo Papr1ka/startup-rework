@@ -1,8 +1,21 @@
 {% extends 'app/form.html' %}
-{% block extra %}
+{% load crispy_forms_tags %}   
 
-<a href="{% url 'skill_create' %}">
-    Добавить навык
-</a>
+
+{% block content %}
+<div class="page body-container h-100">
+    <div class="page wrapper d-flex justify-content-center mh-100 align-items-center">
+        <form method="POST" data-bs-theme="dark">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <a href="{% url 'skill_create' %}" class="btn btn-primary">
+                Добавить навык
+            </a>
+            <button class="btn btn-primary" type="submit">
+                Сохранить
+            </button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
