@@ -9,9 +9,9 @@ User = get_user_model()
 @receiver(post_save, sender=User)
 def createModel(sender, instance, created, **kwargs):
     if created:
-        UserModel.objects.create(user=instance)
+        UserModel.objects.create(user=instance, id=instance.id)
     else:
         try:
             instance.model.save()
         except ObjectDoesNotExist:
-            UserModel.objects.create(user=instance)
+            UserModel.objects.create(user=instance, id=instance.id)
