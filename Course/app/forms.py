@@ -12,7 +12,7 @@ class RegisterForm(UserCreationForm):
     def clean(self):
         email = self.cleaned_data['email']
         if not email or User.objects.filter(email=email).exists():
-            raise ValidationError("User with the email alredy exists")
+            raise ValidationError("User with this email alredy exists")
         return super().clean()
     
     def save(self, commit=True):
@@ -41,3 +41,9 @@ class UserInfoForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["username"]
+    
+    def clean(self):
+        username = self.cleaned_data['username']
+        if not username or User.objects.filter(username=username).exists():
+            raise ValidationError("User with this username alredy exists")
+        return super().clean()

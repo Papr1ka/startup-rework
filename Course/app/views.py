@@ -188,6 +188,14 @@ class PasswordResetDoneView(PasswordResetDoneView):
         r['message'] = "Письмо отправлено, проверяйте почту"
         return r
 
+class PasswordResetCompleteView(TemplateView):
+    template_name = "app/message.html"
+    
+    def get_context_data(self, **kwargs: Any) -> Any:
+        r = super().get_context_data(**kwargs)
+        r['message'] = "Пароль успешно изменён"
+        return r
+
 class ProjectRespondView(LoginRequiredMixin, DetailView):
     permanent = True
     url = reverse_lazy("home")
