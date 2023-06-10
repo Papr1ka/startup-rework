@@ -17,6 +17,9 @@
                     <h5 class="card-title">{{ user }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ user.fio }}</h6>
                     <p class="card-text">{{ user.about }}</p>
+                    {% for skill in user.skills.all %}
+                    <div class="item" style="color: {{ skill.color }}">@{{ skill | title }}</div>
+                    {% endfor %}
                     <form action="{% url 'respond_agree' project_id=project.id pk=user.pk %}" method="post">
                         {% csrf_token %}
                         <button class="btn btn-success" href="#" class="card-link">Принять</button>
